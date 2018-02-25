@@ -30,7 +30,7 @@ class Emailer{
 	}
 	
 	
-	public function setEmailMsg($inEmailMs)
+	public function setEmailMsg($inEmailMsg)
 	{
 		$inEmailMsg=htmlentities($inEmailMsg); //handles special characters
 		$inEmailMsg=wordwrap($inEmailMsg,40,"\n"); //sentence length
@@ -51,9 +51,11 @@ class Emailer{
 	public function sendEmail()
 	{
 		$header="From: $this->sentFrom " . "\r\n";
+	    $sendOK= false;
 	
+	$sendOK = mail($this->sendTo,$this->emailSubject,$this->emailMsg,$header);
 	
-	return mail($this->sentTo,$this->emailSubject,$this->emailMsg,$headers);
+	return $sendOK;
 	}
 }
 
